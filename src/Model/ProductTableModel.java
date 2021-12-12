@@ -10,7 +10,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ProductTableModel extends AbstractTableModel {
 
-    private String[] columnNames = {"ID", "Tên sản phẩm", "Số lượng"};
+    private final String[] columnNames = {"ID", "Tên sản phẩm", "Số lượng"};
     private List<Product> products;
 
     public ProductTableModel() {

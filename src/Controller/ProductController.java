@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Product;
 import Model.ProductDAO;
+import Model.ProductTableModel;
 import View.ProductView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,11 +18,15 @@ public class ProductController {
 
     private ProductView productView;
     private ProductDAO productDAO;
+    
+    private ProductTableModel tableModel;
 
     public ProductController(ProductView view) {
         this.productView = view;
 
         productDAO = new ProductDAO();
+        
+        tableModel = new ProductTableModel();
 
         productView.addAddProductListener(new AddProductListener());
 
@@ -35,8 +40,10 @@ public class ProductController {
     public void showProductView() {
 
         List<Product> products = productDAO.getListProducts();
+        
+        tableModel.setData(products);
 
-        productView.showListProduct(products);
+        productView.setTableModel(tableModel);
 
         productView.setVisible(true);
     }
@@ -51,7 +58,7 @@ public class ProductController {
                 boolean success = productDAO.add(product);
 
                 if (success) {
-                    productView.showListProduct(productDAO.getListProducts());
+                    tableModel.setData(productDAO.getListProducts());
 
                     productView.showMessage("Thêm thành công!");
                 } else {
@@ -72,7 +79,7 @@ public class ProductController {
                 boolean success = productDAO.edit(product);
 
                 if (success) {
-                    productView.showListProduct(productDAO.getListProducts());
+                    tableModel.setData(productDAO.getListProducts());
 
                     productView.showMessage("Sửa thành công!");
                 } else {
@@ -92,7 +99,7 @@ public class ProductController {
                 boolean success = productDAO.delete(product);
 
                 if (success) {
-                    productView.showListProduct(productDAO.getListProducts());
+                    tableModel.setData(productDAO.getListProducts());
 
                     productView.showMessage("Xóa thành công!");
                 } else {

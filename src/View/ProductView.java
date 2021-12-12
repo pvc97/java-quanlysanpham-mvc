@@ -5,9 +5,7 @@ import Model.ProductTableModel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,7 +23,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class ProductView extends JFrame {
 
-    private ProductTableModel tableModel;
+    
 
     private JTable table;
     private JButton btnAdd;
@@ -48,9 +46,6 @@ public class ProductView extends JFrame {
         setLayout(new BorderLayout());
 
         table = new JTable();
-
-        tableModel = new ProductTableModel();
-        table.setModel(tableModel);
 
         add(new JScrollPane(table), BorderLayout.CENTER);
         add(createBottomPanel(), BorderLayout.SOUTH);
@@ -115,8 +110,8 @@ public class ProductView extends JFrame {
         return bottomPanel;
     }
     
-    public void showListProduct(List<Product> products) {
-        tableModel.setData(products);
+    public void setTableModel(ProductTableModel tableModel) {
+        table.setModel(tableModel);
     }
     
     public void addAddProductListener(ActionListener listener) {
